@@ -97,7 +97,7 @@
                         <input type="button" name="${student.id}" value="Edit" class="modification-buttons" />
                     </td>
                     <td>
-                        <input type="button" name="${student.id}" value="Delete" class="modification-buttons" />
+                        <input type="button" name="${student.id}" value="Delete" class="modification-buttons" onclick="window.location.href='/student/${student.id}/delete'" />
                     </td>
                 </tr>
 

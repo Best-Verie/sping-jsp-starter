@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.client.RestTemplate;
@@ -79,6 +80,36 @@ public class StudentResource {
 
         return "redirect:/student/allStudents";
     }
+
+
+    @PostMapping("/{id}/delete")
+    public String deleteStudent(Model model, HttpServletRequest request, @PathVariable long id) {
+        if(request.getSession().getAttribute("token").toString().isEmpty()){
+            return "redirect:/auth/login";
+        }
+
+
+        RestTemplate restTemplate =  new RestTemplate();
+
+        Map<String, String> requestBody = new HashMap<>();
+
+
+//        for (Map.Entry<String, String[]> entry : request.getParameterMap().entrySet()) {
+//            requestBody.put(entry.getKey(), entry.getValue()[0]);
+//        }
+
+        String token = request.getSession().getAttribute("token").toString();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBearerAuth(token);
+        HttpEntity<Object> entity = new HttpEntity<>(null, headers);
+
+
+        ResponseEntity<ApiResponse> res = restTemplate.exchange(formatURL("/api/students/"+id), HttpMethod.DELETE,  entity,  ApiResponse.class);
+
+        return "redirect:/student/allStudents";
+    }
+
 
 
 
