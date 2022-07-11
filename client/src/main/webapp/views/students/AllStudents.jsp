@@ -74,7 +74,7 @@
 <%--<jsp:include page="components/Navbar.jsp"></jsp:include>--%>
 <div class="view-employees-container">
     <h2>View students</h2>
-    <input type="button"  value="Add new " class="modification-buttons"  onclick="window.location.href='/'"/>
+    <input type="button"  value="Add new " class="modification-buttons"  onclick="window.location.href='/student/addStudent'"/>
 
     <div class="view-employees-container-sub">
         <table>
